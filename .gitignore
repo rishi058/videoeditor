@@ -68,3 +68,5 @@ learn.json
 .mypy_cache/
 idk.tsx
 idk.ts
+
+build

@@ -54,17 +54,12 @@ create table if not exists verification (
 );
 
 -- Trigger to auto-update updatedAt fields (Postgres example)
-do $$
+create or replace function set_updated_at() returns trigger as $$
 begin
-  if not exists (select 1 from pg_proc where proname = 'set_updated_at') then
-    create function set_updated_at() returns trigger as $$
-    begin
-      new."updatedAt" = now();
-      return new;
-    end;
-    $$ language plpgsql;
-  end if;
-end$$;
+  new."updatedAt" = now();
+  return new;
+end;
+$$ language plpgsql;
 
 -- Attach triggers where appropriate
 do $$ begin
