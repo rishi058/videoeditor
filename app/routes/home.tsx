@@ -21,6 +21,7 @@ import {
   BetweenVerticalEnd,
   CornerUpLeft,
   CornerUpRight,
+  Captions,
 } from "lucide-react";
 
 // Custom video controls
@@ -109,8 +110,20 @@ export default function TimelineEditor() {
 
   const [selectedScrubberIds, setSelectedScrubberIds] = useState<string[]>([]);
 
-  // video player media selection state
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  // Unified selection state derived from timeline
+  const selectedItem = selectedScrubberIds.length === 1 ? selectedScrubberIds[0] : null;
+
+  const setSelectedItem = useCallback((itemOrUpdater: React.SetStateAction<string | null>) => {
+    if (typeof itemOrUpdater === 'function') {
+      setSelectedScrubberIds((prev) => {
+        const currentId = prev.length === 1 ? prev[0] : null;
+        const nextId = itemOrUpdater(currentId);
+        return nextId ? [nextId] : [];
+      });
+    } else {
+      setSelectedScrubberIds(itemOrUpdater ? [itemOrUpdater] : []);
+    }
+  }, []);
 
   const {
     timeline,
@@ -208,7 +221,7 @@ export default function TimelineEditor() {
   }, []);
 
   const openSection = useCallback(
-    (section: "media-bin" | "text-editor" | "transitions") => {
+    (section: "media-bin" | "text-editor" | "transitions" | "subtitles-bin") => {
       const isProjectRoot = /^\/project\/[^/]+\/?$/.test(location.pathname);
       const isActive =
         (section === "media-bin" && (location.pathname.includes("/media-bin") || isProjectRoot)) ||
@@ -283,6 +296,7 @@ export default function TimelineEditor() {
             left_transition_id: null,
             right_transition_id: null,
             groupped_scrubbers: t.groupped_scrubbers || null,
+            subtitleData: null,
           }));
           setTextItems(textItems);
         } else {
@@ -306,6 +320,7 @@ export default function TimelineEditor() {
               left_transition_id: null,
               right_transition_id: null,
               groupped_scrubbers: null,
+              subtitleData: null,
             }));
           if (textItems.length) setTextItems(textItems);
         }
@@ -410,13 +425,13 @@ export default function TimelineEditor() {
         redo();
         return;
       }
-      // Delete selected item from Player (not just timeline scrubber)
+      // Delete selected items
       if (key === "delete") {
-        if (selectedItem) {
+        if (selectedScrubberIds.length > 0) {
           e.preventDefault();
           e.stopPropagation();
-          handleDeleteScrubber(selectedItem);
-          setSelectedItem(null);
+          selectedScrubberIds.forEach((id) => handleDeleteScrubber(id));
+          setSelectedScrubberIds([]);
           return;
         }
       }
@@ -428,7 +443,7 @@ export default function TimelineEditor() {
       window.removeEventListener("keydown", onKeyDown, {
         capture: true,
       } as AddEventListenerOptions);
-  }, [handleSaveTimeline, undo, redo, selectedItem, handleDeleteScrubber, setSelectedItem]);
+  }, [handleSaveTimeline, undo, redo, selectedScrubberIds, handleDeleteScrubber]);
 
   const handleFileInputChange = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -844,6 +859,16 @@ export default function TimelineEditor() {
               onClick={() => openSection("transitions")}
               title="Transitions">
               <BetweenVerticalEnd className="h-5 w-5" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className={`h-9 w-9 p-0 ${
+                location.pathname.includes("/subtitles-bin") ? "bg-background text-primary" : "text-muted-foreground"
+              }`}
+              onClick={() => openSection("subtitles-bin")}
+              title="Captions">
+              <Captions className="h-5 w-5" />
             </Button>
           </div>
           <div className="flex flex-col items-center">

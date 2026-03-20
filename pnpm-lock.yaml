@@ -78,18 +78,27 @@ importers:
       '@react-router/serve':
         specifier: ^7.7.1
         version: 7.7.1(react-router@7.12.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(typescript@5.8.3)
+      '@remotion/animation-utils':
+        specifier: ^4.0.329
+        version: 4.0.329(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@remotion/bundler':
         specifier: 4.0.329
         version: 4.0.329(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@remotion/captions':
-        specifier: 4.0.331
-        version: 4.0.331
+        specifier: 4.0.329
+        version: 4.0.329
       '@remotion/cli':
         specifier: 4.0.329
         version: 4.0.329(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@remotion/eslint-plugin':
         specifier: ^4.0.329
         version: 4.0.329(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3)
+      '@remotion/google-fonts':
+        specifier: ^4.0.329
+        version: 4.0.329(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@remotion/layout-utils':
+        specifier: ^4.0.329
+        version: 4.0.329
       '@remotion/media-parser':
         specifier: 4.0.329
         version: 4.0.329
@@ -1543,14 +1552,20 @@ packages:
     peerDependencies:
       react-router: '>=7.9.0'
 
+  '@remotion/animation-utils@4.0.329':
+    resolution: {integrity: sha512-Em37wRN3YENqQGrkdRlhGyjT0afEEs64EG6x63Gk5M4dgMgtyxA1M5TSR0dsyinDhQApPaan0mY9qf/YmPtP3Q==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
   '@remotion/bundler@4.0.329':
     resolution: {integrity: sha512-9nNj8c/OOtoarh9fNSEn92ySJnBiFiLvrs9xkGdaot23eB9BnjUSCZZp5ei6B1IXKtofOoHdYeupLUHZ9dTlyA==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
-  '@remotion/captions@4.0.331':
-    resolution: {integrity: sha512-cip734ht4BLbcAXkz9tbs7fk514O/1ZjPogCKnWabyXZuyELWgQrfM5nIu73naXm56qtfZHJ4bWLYuKKKzFIbw==}
+  '@remotion/captions@4.0.329':
+    resolution: {integrity: sha512-oxmJ5CjO1SyfYU42JVLGSvEoylacYOsaF8Lm6VtpRl8ayCEQTNzxhsT9Awu4GUrSumEJriBCXi7lKY8IG0rkSw==}
 
   '@remotion/cli@4.0.329':
     resolution: {integrity: sha512-6MoSY73yW+yqB+tVimmLyNRdmS/SICsSu6+vvvFL37dIHZLcFRQVO8ToRUC8DBTuUidujRm6JiSEdN6Q8BPYWg==}
@@ -1573,21 +1588,25 @@ packages:
     resolution: {integrity: sha512-x374H8PkEd6T94k6tKoisn8lQuxjPvf5yUPjldIUCuRQPMBsqTqDs9LEQdXhjYhdSj7KZwc40tuaXXeAANuJDA==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@remotion/compositor-linux-arm64-musl@4.0.329':
     resolution: {integrity: sha512-784c3/DpQiw4hz0uT03MQ0JygxTByHi9Nn/N3Mj62Nnk3UrjrQlN6hSxeBBK9ow3C2gF3lVf9KEQUOV4P0HJCg==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@remotion/compositor-linux-x64-gnu@4.0.329':
     resolution: {integrity: sha512-Lj65e0wDzqfdPtwdV91JB8rvfYVFx8ZTw5yZRUyyQ4dgJis5mEX8zyLaCBNepFgzGVyH8MrBznSupUMehCcGTg==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@remotion/compositor-linux-x64-musl@4.0.329':
     resolution: {integrity: sha512-DaA+c10TOHHNJpXc9JmgbulBvO8uyHwXyAwBkGy5sGmIT2P9frGC088i6oIcsYFWgM/GnevKHNhQ7yEK0kUN7w==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@remotion/compositor-win32-x64-msvc@4.0.329':
     resolution: {integrity: sha512-QOq1WGTlAIP0WqGSPTPavgeR0za2sAvopG4scKEAIDLEja/V06SAvHFbJv6Silis/Fd5Sh8eVoXd7gLYEqAD3g==}
@@ -1598,6 +1617,12 @@ packages:
     resolution: {integrity: sha512-np+zYcDXC1+6Hvm2VZl7B9WUU1kR4AZ0rWtNFWJKQo6H0tFYuMv1YaLVSNpldc91HUH6ubXOCwqWMpZiM8BSMQ==}
     peerDependencies:
       eslint: '>=7.0.0'
+
+  '@remotion/google-fonts@4.0.329':
+    resolution: {integrity: sha512-veMGzY/j99Nw/CIzfYJtAjTY7w23Z02lWmr54szWUAfQ7YvA/OCfTVQqFFR3pw4Rn6C/cnj2BDTKsxdvDSUFUw==}
+
+  '@remotion/layout-utils@4.0.329':
+    resolution: {integrity: sha512-xlwFJ7ZW3nn+AnDOyPDrwAeH3jQ1q21pdhQ4XfYBD4I9WIFtY1BfZzGAMNUV5SXcKlwrM62zOotf5QdIlEdFaQ==}
 
   '@remotion/licensing@4.0.329':
     resolution: {integrity: sha512-MZ0JVILmLXshc+xFR7rvIpUn7YE/yjZk2sfa21BVetpWzKrjxSGqISAmS9J/1bqG0Y7e8bHMV9M95nAAkBLBRw==}
@@ -1695,56 +1720,67 @@ packages:
     resolution: {integrity: sha512-54v4okehwl5TaSIkpp97rAHGp7t3ghinRd/vyC1iXqXMfjYUTm7TfYmCzXDoHUPTTf36L8pr0E7YsD3CfB3ZDg==}
     cpu: [arm]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm-musleabihf@4.50.1':
     resolution: {integrity: sha512-p/LaFyajPN/0PUHjv8TNyxLiA7RwmDoVY3flXHPSzqrGcIp/c2FjwPPP5++u87DGHtw+5kSH5bCJz0mvXngYxw==}
     cpu: [arm]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-arm64-gnu@4.50.1':
     resolution: {integrity: sha512-2AbMhFFkTo6Ptna1zO7kAXXDLi7H9fGTbVaIq2AAYO7yzcAsuTNWPHhb2aTA6GPiP+JXh85Y8CiS54iZoj4opw==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm64-musl@4.50.1':
     resolution: {integrity: sha512-Cgef+5aZwuvesQNw9eX7g19FfKX5/pQRIyhoXLCiBOrWopjo7ycfB292TX9MDcDijiuIJlx1IzJz3IoCPfqs9w==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-loongarch64-gnu@4.50.1':
     resolution: {integrity: sha512-RPhTwWMzpYYrHrJAS7CmpdtHNKtt2Ueo+BlLBjfZEhYBhK00OsEqM08/7f+eohiF6poe0YRDDd8nAvwtE/Y62Q==}
     cpu: [loong64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-ppc64-gnu@4.50.1':
     resolution: {integrity: sha512-eSGMVQw9iekut62O7eBdbiccRguuDgiPMsw++BVUg+1K7WjZXHOg/YOT9SWMzPZA+w98G+Fa1VqJgHZOHHnY0Q==}
     cpu: [ppc64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-gnu@4.50.1':
     resolution: {integrity: sha512-S208ojx8a4ciIPrLgazF6AgdcNJzQE4+S9rsmOmDJkusvctii+ZvEuIC4v/xFqzbuP8yDjn73oBlNDgF6YGSXQ==}
     cpu: [riscv64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-musl@4.50.1':
     resolution: {integrity: sha512-3Ag8Ls1ggqkGUvSZWYcdgFwriy2lWo+0QlYgEFra/5JGtAd6C5Hw59oojx1DeqcA2Wds2ayRgvJ4qxVTzCHgzg==}
     cpu: [riscv64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-s390x-gnu@4.50.1':
     resolution: {integrity: sha512-t9YrKfaxCYe7l7ldFERE1BRg/4TATxIg+YieHQ966jwvo7ddHJxPj9cNFWLAzhkVsbBvNA4qTbPVNsZKBO4NSg==}
     cpu: [s390x]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-gnu@4.50.1':
     resolution: {integrity: sha512-MCgtFB2+SVNuQmmjHf+wfI4CMxy3Tk8XjA5Z//A0AKD7QXUYFMQcns91K6dEHBvZPCnhJSyDWLApk40Iq/H3tA==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.50.1':
     resolution: {integrity: sha512-nEvqG+0jeRmqaUMuwzlfMKwcIVffy/9KGbAGyoa26iu6eSngAYQ512bMXuqqPrlTyfqdlB9FVINs93j534UJrg==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-openharmony-arm64@4.50.1':
     resolution: {integrity: sha512-RDsLm+phmT3MJd9SNxA9MNuEAO/J2fhW8GXk62G/B4G7sLVumNFbRwDL6v5NrESb48k+QMqdGbHgEtfU0LCpbA==}
@@ -1807,24 +1843,28 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@tailwindcss/oxide-linux-arm64-musl@4.1.11':
     resolution: {integrity: sha512-m/NVRFNGlEHJrNVk3O6I9ggVuNjXHIPoD6bqay/pubtYC9QIdAMpS+cswZQPBLvVvEF6GtSNONbDkZrjWZXYNQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@tailwindcss/oxide-linux-x64-gnu@4.1.11':
     resolution: {integrity: sha512-YW6sblI7xukSD2TdbbaeQVDysIm/UPJtObHJHKxDEcW2exAtY47j52f8jZXkqE1krdnkhCMGqP3dbniu1Te2Fg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@tailwindcss/oxide-linux-x64-musl@4.1.11':
     resolution: {integrity: sha512-e3C/RRhGunWYNC3aSF7exsQkdXzQ/M+aYuZHKnw4U7KQwTJotnWsGOIVih0s2qQzmEzOFIJ3+xt7iq67K/p56Q==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@tailwindcss/oxide-wasm32-wasi@4.1.11':
     resolution: {integrity: sha512-Xo1+/GU0JEN/C/dvcammKHzeM6NqKovG+6921MR6oadee5XPBaKOumrJCXvopJ/Qb5TH7LX/UAywbqrP4lax0g==}
@@ -3226,24 +3266,28 @@ packages:
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   lightningcss-linux-arm64-musl@1.30.1:
     resolution: {integrity: sha512-jmUQVx4331m6LIX+0wUhBbmMX7TCfjF5FoOH6SD1CttzuYlGNVpA7QnrmLxrsub43ClTINfGSYyHe2HWeLl5CQ==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   lightningcss-linux-x64-gnu@1.30.1:
     resolution: {integrity: sha512-piWx3z4wN8J8z3+O5kO74+yr6ze/dKmPnI7vLqfSqI8bccaTGY5xiSGVIJBDd5K5BHlvVLpUB3S2YCfelyJ1bw==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   lightningcss-linux-x64-musl@1.30.1:
     resolution: {integrity: sha512-rRomAK7eIkL+tHY0YPxbc5Dra2gXlI63HL+v1Pdi1a3sC+tJTcFrHX+E86sulgAXeI7rSzDYhPSeHHjqFhqfeQ==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   lightningcss-win32-arm64-msvc@1.30.1:
     resolution: {integrity: sha512-mSL4rqPi4iXq5YVqzSsJgMVFENoa4nGTT/GjO2c0Yl9OuQfPsIfncvLrEW6RbbB24WtZ3xP/2CCmI3tNkNV4oA==}
@@ -5671,6 +5715,12 @@ snapshots:
       - supports-color
       - typescript
 
+  '@remotion/animation-utils@4.0.329(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      remotion: 4.0.329(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+
   '@remotion/bundler@4.0.329(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
       '@remotion/media-parser': 4.0.329
@@ -5693,7 +5743,7 @@ snapshots:
       - utf-8-validate
       - webpack-cli
 
-  '@remotion/captions@4.0.331': {}
+  '@remotion/captions@4.0.329': {}
 
   '@remotion/cli@4.0.329(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
@@ -5746,6 +5796,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - typescript
+
+  '@remotion/google-fonts@4.0.329(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      remotion: 4.0.329(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+    transitivePeerDependencies:
+      - react
+      - react-dom
+
+  '@remotion/layout-utils@4.0.329': {}
 
   '@remotion/licensing@4.0.329': {}
 

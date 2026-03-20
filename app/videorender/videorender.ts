@@ -295,8 +295,8 @@ app.post("/render", async (req, res) => {
       inputProps,
       // Optimized settings for server hardware
       concurrency: 3, // Use 3 cores, leave 1 for system
-      verbose: true,
-      logLevel: "info", // More detailed logging for server monitoring
+      verbose: false,
+      logLevel: "warn", // Only show warnings and errors
       // Balanced encoding settings for server performance
       ffmpegOverride: ({ args }) => {
         return [

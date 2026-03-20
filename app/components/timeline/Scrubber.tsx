@@ -2,6 +2,10 @@ import React, { useState, useRef, useCallback, useEffect } from "react";
 import { DEFAULT_TRACK_HEIGHT, type ScrubberState, type Transition } from "./types";
 import { Trash2, Group, Ungroup, Archive } from "lucide-react";
 
+// Display-only: strips trailing _<digits> before the extension, e.g. foo_1773949404810.json -> foo.json
+const stripTimestampSuffix = (filename: string) =>
+  filename.replace(/_\d+(\.[^.]+)$/, "$1");
+
 // something something for the css not gonna bother with it for now
 export interface SnapConfig {
   enabled: boolean;
@@ -305,6 +309,7 @@ export const Scrubber: React.FC<ScrubberProps> = ({
       default: "bg-primary border-primary/60 text-primary-foreground",
       audio: "bg-blue-600 border-blue-400 text-white",
       groupped_scrubber: "bg-gray-600 border-gray-400 text-white",
+      subtitle: "bg-yellow-600 border-yellow-500 text-white",
     };
 
     const selectedColors = {
@@ -319,6 +324,8 @@ export const Scrubber: React.FC<ScrubberProps> = ({
         "bg-primary border-primary text-primary-foreground ring-2 ring-primary/50",
       groupped_scrubber:
         "bg-gray-600 border-gray-400 text-white ring-2 ring-gray-400/50",
+      subtitle:
+        "bg-yellow-600 border-yellow-400 text-white ring-2 ring-yellow-400/50",
     };
 
     const colorSet = isSelected ? selectedColors : baseColors;
@@ -441,7 +448,7 @@ export const Scrubber: React.FC<ScrubberProps> = ({
 
         {/* Media name */}
         <div className="absolute top-0.5 left-6 right-6 text-xs truncate opacity-90 pointer-events-none">
-          {scrubber.name}
+          {stripTimestampSuffix(scrubber.name)}
         </div>
 
         {/* Left resize handle - more visible */}
@@ -473,7 +480,7 @@ export const Scrubber: React.FC<ScrubberProps> = ({
             className={`absolute left-1/2 transform -translate-x-1/2 bg-popover text-popover-foreground text-xs px-2 py-1 rounded-sm pointer-events-none border border-border shadow-md z-50 whitespace-nowrap ${(scrubber.y || 0) === 0 ? "top-full mt-1" : "-top-8"
               }`}
           >
-            {scrubber.name} • {(scrubber.left / pixelsPerSecond).toFixed(2)}s -{" "}
+            {stripTimestampSuffix(scrubber.name)} • {(scrubber.left / pixelsPerSecond).toFixed(2)}s -{" "}
             {((scrubber.left + scrubber.width) / pixelsPerSecond).toFixed(2)}s
           </div>
         )}

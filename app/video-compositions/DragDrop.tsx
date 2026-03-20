@@ -178,13 +178,14 @@ export const SelectionOutline: React.FC<{
       top: ScrubberState.top_player,
       position: "absolute",
       outline:
-        (hovered && !isDragging) || isSelected
+        isSelected
           ? `${scaledBorder}px solid rgb(59, 130, 246)` // Use a consistent blue
           : undefined,
       userSelect: "none",
       touchAction: "none",
+      cursor: isSelected ? "move" : hovered ? "pointer" : "default",
     };
-  }, [ScrubberState, hovered, isDragging, isSelected, scaledBorder]);
+  }, [ScrubberState, hovered, isSelected, scaledBorder]);
 
   const startDragging = useCallback(
     (e: PointerEvent | React.MouseEvent) => {
@@ -232,10 +233,14 @@ export const SelectionOutline: React.FC<{
       }
 
       console.log("onPointerDown is called", ScrubberState.id);
+      
+      // Select the item and allow dragging
       setSelectedItem(ScrubberState.id);
-      startDragging(e);
+      if (isSelected) {
+        startDragging(e);
+      }
     },
-    [ScrubberState.id, setSelectedItem, startDragging]
+    [ScrubberState.id, setSelectedItem, startDragging, isSelected]
   );
 
   return (

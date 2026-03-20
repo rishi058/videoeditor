@@ -1,13 +1,14 @@
 // base type for all scrubbers
 export interface BaseScrubber {
   id: string;
-  mediaType: "video" | "image" | "audio" | "text" | "groupped_scrubber";
-  mediaUrlLocal: string | null; // null for text
-  mediaUrlRemote: string | null;
+  mediaType: "video" | "image" | "audio" | "text" | "groupped_scrubber" | "subtitle";
+  mediaUrlLocal: string | null; // null for text and subtitle
+  mediaUrlRemote: string | null; // for subtitle, this can hold the path like /api/subtitles/foo.json
   media_width: number; // width of the media in pixels
   media_height: number; // height of the media in pixels
 
   text: TextProperties | null;
+  subtitleData: any | null; // Parsed JSON data for subtitle
   groupped_scrubbers: ScrubberState[] | null; // null for not grouped
   //  groupped_scrubber_transitions: Transition[] | null; // null for no transitions / not groupped scrubbers [this is written to help with deepcopy]
 

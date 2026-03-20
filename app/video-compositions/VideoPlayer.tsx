@@ -21,6 +21,19 @@ import {
   type Transition,
 } from "../components/timeline/types";
 import { SortedOutlines, layerContainer, outer } from "./DragDrop";
+import { SubtitleTrackRenderer } from "./SubtitleTrackRenderer";
+
+const resolveMediaUrl = (url: string | null | undefined, isRendering: boolean): string | undefined => {
+  if (!url) return undefined;
+  if (url.startsWith("/")) {
+    if (isRendering) {
+      const char = url.includes("?") ? "&" : "?";
+      return `http://localhost:5173${url}${char}render=true`;
+    }
+    return url;
+  }
+  return url;
+};
 
 type TimelineCompositionProps = {
   timelineData: TimelineDataItem[];
@@ -131,9 +144,10 @@ export function TimelineComposition({
         );
         break;
       case "image": {
-        const imageUrl = isRendering
+        const rawImageUrl = isRendering
           ? scrubber.mediaUrlRemote || scrubber.mediaUrlLocal
           : scrubber.mediaUrlLocal || scrubber.mediaUrlRemote;
+        const imageUrl = resolveMediaUrl(rawImageUrl, isRendering);
         content = (
           <AbsoluteFill
             style={{
@@ -149,9 +163,10 @@ export function TimelineComposition({
         break;
       }
       case "video": {
-        const videoUrl = isRendering
+        const rawVideoUrl = isRendering
           ? scrubber.mediaUrlRemote || scrubber.mediaUrlLocal
           : scrubber.mediaUrlLocal || scrubber.mediaUrlRemote;
+        const videoUrl = resolveMediaUrl(rawVideoUrl, isRendering);
         content = (
           <AbsoluteFill
             style={{
@@ -171,15 +186,35 @@ export function TimelineComposition({
         break;
       }
       case "audio": {
-        const audioUrl = isRendering
+        const rawAudioUrl = isRendering
           ? scrubber.mediaUrlRemote || scrubber.mediaUrlLocal
           : scrubber.mediaUrlLocal || scrubber.mediaUrlRemote;
+        const audioUrl = resolveMediaUrl(rawAudioUrl, isRendering);
         content = (
           <Audio
             src={audioUrl!}
             trimBefore={scrubber.trimBefore || undefined}
             trimAfter={scrubber.trimAfter || undefined}
           />
+        );
+        break;
+      }
+      case "subtitle": {
+        const rawSubtitleUrl = isRendering
+          ? scrubber.mediaUrlRemote || scrubber.mediaUrlLocal
+          : scrubber.mediaUrlLocal || scrubber.mediaUrlRemote;
+        const subtitleUrl = resolveMediaUrl(rawSubtitleUrl, isRendering);
+        content = (
+          <AbsoluteFill
+            style={{
+              left: scrubber.left_player,
+              top: scrubber.top_player,
+              width: scrubber.width_player,
+              height: scrubber.height_player,
+            }}
+          >
+            {subtitleUrl && <SubtitleTrackRenderer src={subtitleUrl} />}
+          </AbsoluteFill>
         );
         break;
       }

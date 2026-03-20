@@ -167,6 +167,7 @@ export const useTimeline = () => {
           media_width: scrubber.media_width,
           media_height: scrubber.media_height,
           text: scrubber.text,
+          subtitleData: scrubber.subtitleData,
 
           // the following are the properties of the scrubber in <Player>
           left_player: scrubber.left_player,
@@ -555,7 +556,7 @@ export const useTimeline = () => {
       const pixelsPerSecond = getPixelsPerSecond();
       let widthPx = item.mediaType === "text" ? 80 : 150;
       if (
-        (item.mediaType === "video" || item.mediaType === "audio" || item.mediaType === "groupped_scrubber") &&
+        (item.mediaType === "video" || item.mediaType === "audio" || item.mediaType === "groupped_scrubber" || item.mediaType === "subtitle") &&
         item.durationInSeconds
       ) {
         widthPx = item.durationInSeconds * pixelsPerSecond;
@@ -565,7 +566,7 @@ export const useTimeline = () => {
       widthPx = Math.max(20, widthPx);
 
       const targetTrackIndex = timeline.tracks.findIndex((t) => t.id === trackId);
-      if (targetTrackIndex === -1) return;
+      if (targetTrackIndex === -1) return "";
 
       // For text elements, provide default dimensions if they're 0
       const playerWidth =
@@ -600,6 +601,7 @@ export const useTimeline = () => {
         media_width: item.media_width,
         media_height: item.media_height,
         text: item.text,
+        subtitleData: item.subtitleData,
         groupped_scrubbers: processedGroupedScrubbers,
         sourceMediaBinId: item.id,
 
@@ -1367,6 +1369,7 @@ export const useTimeline = () => {
           media_width: rightmost - leftmost,
           media_height: 60,
           text: null,
+          subtitleData: null,
           groupped_scrubbers: scrubbersToGroup,
           left_transition_id: null,
           right_transition_id: null,
@@ -1452,6 +1455,7 @@ export const useTimeline = () => {
         media_width: id.media_width,
         media_height: id.media_height,
         text: id.text,
+        subtitleData: id.subtitleData,
         groupped_scrubbers: id.groupped_scrubbers,
         left_transition_id: id.left_transition_id,
         right_transition_id: id.right_transition_id,

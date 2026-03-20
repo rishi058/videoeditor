@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Outlet, useLocation } from "react-router";
-import { FileImage, Type, BetweenVerticalEnd } from "lucide-react";
+import { FileImage, Type, BetweenVerticalEnd, Captions } from "lucide-react";
 import { type MediaBinItem } from "~/components/timeline/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 
@@ -57,6 +57,7 @@ export default function LeftPanel({
     if (location.pathname.includes("/media-bin")) return "media-bin";
     if (location.pathname.includes("/text-editor")) return "text-editor";
     if (location.pathname.includes("/transitions")) return "transitions";
+    if (location.pathname.includes("/subtitles-bin")) return "subtitles-bin";
     return "media-bin"; // default
   };
 
@@ -68,7 +69,7 @@ export default function LeftPanel({
         {/* Tab Headers */}
         {showTabs && (
           <div className="border-b border-border bg-muted/30">
-            <TabsList className="grid w-full grid-cols-3 h-9 bg-transparent p-0">
+            <TabsList className="grid w-full grid-cols-4 h-9 bg-transparent p-0">
               <TabsTrigger
                 value="media-bin"
                 asChild
@@ -91,6 +92,14 @@ export default function LeftPanel({
                 className="h-8 text-xs data-[state=active]:bg-background data-[state=active]:shadow-sm">
                 <Link to="transitions" className="flex items-center gap-1.5">
                   <BetweenVerticalEnd className="h-3 w-3" />
+                </Link>
+              </TabsTrigger>
+              <TabsTrigger
+                value="subtitles-bin"
+                asChild
+                className="h-8 text-xs data-[state=active]:bg-background data-[state=active]:shadow-sm">
+                <Link to="subtitles-bin" className="flex items-center gap-1.5">
+                  <Captions className="h-3 w-3" />
                 </Link>
               </TabsTrigger>
             </TabsList>

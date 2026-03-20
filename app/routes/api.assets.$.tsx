@@ -64,11 +64,11 @@ function inferMediaTypeFromName(name: string, fallback: string = "application/oc
 export async function loader({ request }: { request: Request }) {
   const url = new URL(request.url);
   const pathname = url.pathname;
-
-  const userId = await requireUserId(request);
+  const isRenderRequest = url.searchParams.get("render") === "true";
 
   // GET /api/assets[?projectId=...] -> list assets for user
   if (pathname.endsWith("/api/assets") && request.method === "GET") {
+    const userId = await requireUserId(request);
     const projectIdParam = new URL(request.url).searchParams.get("projectId");
     const projectId = projectIdParam ? String(projectIdParam) : null;
     const rows = await listAssetsByUser(userId, projectId);
@@ -99,7 +99,19 @@ export async function loader({ request }: { request: Request }) {
   if (rawMatch && request.method === "GET") {
     const assetId = rawMatch[1];
     const asset = await getAssetById(assetId);
-    if (!asset || asset.user_id !== userId) {
+    let allowed = false;
+    if (isRenderRequest && asset) {
+       allowed = true;
+    } else if (asset) {
+       try {
+           const userId = await requireUserId(request);
+           if (asset.user_id === userId) allowed = true;
+       } catch {
+           allowed = false;
+       }
+    }
+    
+    if (!allowed || !asset) {
       return new Response(JSON.stringify({ error: "Not found" }), {
         status: 404,
         headers: { "Content-Type": "application/json" },
